@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="/static/styles.css" rel="stylesheet">
+        <title>Vaccine Slot Availability</title>
+    </head>
+    <body>
+        <div class="jumbotron">
+            <h1>Vaccine Slot Availability</h1>
+        </div>
+        <div class="container">
+            <div class="section">
+
+                <h2>Add Details</h2>
+                <!-- TODO: Create a form for users to submit a name, a month, and a day -->
+                <form method='POST' action='/pin'>
+                    <input type='text' placeholder='Enter name' name='uname'>
+                    <input type='text' placeholder='Enter mobile number' name='phone'>
+                    <input type='text' placeholder='Enter age' name='age'>
+                    <input type='text' placeholder='Enter pincode' name='pincode'>
+                    <button>GET SLOTS</button>
+                </form>
+            </div>
+
+            <div class="section">
+
+
+                <h2>All Available Slots</h2>
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    <ul class=flashes>
+                    {% for message in messages %}
+                      <span>{{ message }}</span>
+                    {% endfor %}
+                    </ul>
+                  {% endif %}
+                {% endwith %}
+
+                <table>
+
+                    <thead>
+                        <tr>
+                           <th>Date</th>
+                            <th>Center Name</th>
+                            <th>Available_capacity</th>
+                            <th>Minimum Age</th>
+                            <th>Vaccine</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for slot in slots %}
+                        <tr>
+                            <td>
+                                {{slot[0]}}
+                            </td>
+                            <td>
+                                 {{slot[1]}}
+                            </td>
+                            <td>
+                                 {{slot[2]}}
+                            </td>
+                            <td>
+                                 {{slot[3]}}
+                            </td>
+                            <td>
+                                 {{slot[4]}}
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
